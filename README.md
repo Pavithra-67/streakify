@@ -1,6 +1,6 @@
 # 🚀 Streakify
 
-A **gamified learning platform** inspired by Duolingo that helps users practice technical subjects through daily quizzes while maintaining learning streaks, earning XP, and competing on a leaderboard.
+Streakify is a full-stack gamified learning platform that transforms technical practice into an engaging daily habit. Users can solve subject-based quizzes, maintain learning streaks, earn XP, unlock achievements, and climb a real-time leaderboard—all while tracking their progress through an intuitive dashboard.
 
 ---
 
@@ -76,6 +76,7 @@ https://streakify-bay.vercel.app/
 - 🎨 Gamified UI inspired by Duolingo
 - ☁️ Cloud database using MongoDB Atlas
 - 🚀 Deployed using Vercel
+- 📱 Responsive UI that adapts seamlessly across mobile, tablet, and desktop devices.
 
 ---
 
