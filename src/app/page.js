@@ -1,65 +1,90 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="center-page">
+      {/* Floating decorative particles */}
+      <div
+        className="floating-particle"
+        style={{
+          top: "20%",
+          left: "15%",
+          width: "12px",
+          height: "12px",
+          background: "var(--primary)",
+          animation: "particle-float 4s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="floating-particle"
+        style={{
+          top: "60%",
+          right: "20%",
+          width: "10px",
+          height: "10px",
+          background: "var(--secondary)",
+          animation: "particle-float 5s ease-in-out infinite 1s",
+        }}
+      />
+      <div
+        className="floating-particle"
+        style={{
+          top: "30%",
+          right: "30%",
+          width: "8px",
+          height: "8px",
+          background: "var(--accent)",
+          animation: "particle-float 3.5s ease-in-out infinite 0.5s",
+        }}
+      />
+      <div
+        className="floating-particle"
+        style={{
+          bottom: "30%",
+          left: "25%",
+          width: "14px",
+          height: "14px",
+          background: "var(--warning)",
+          animation: "particle-float 6s ease-in-out infinite 2s",
+        }}
+      />
+
+      <div style={{ position: "relative", marginBottom: "8px" }}>
+        <span
+          style={{
+            fontSize: "4rem",
+            display: "block",
+            animation: "float 3s ease-in-out infinite",
+          }}
+        >
+          ⚡
+        </span>
+      </div>
+
+      <h1>Streakify</h1>
+      <p>Learn every day. Build your streak. Level up your knowledge.</p>
+
+      <div
+        style={{
+          display: "flex",
+          gap: "12px",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          marginTop: "8px",
+        }}
+      >
+        <Link className="button button-primary" href="/register">
+          🚀 Get Started
+        </Link>
+        <Link
+          className="button button-secondary"
+          href="/login"
+          style={{ background: "linear-gradient(135deg, #8A8AAA, #6A6A8A)" }}
+        >
+          🔑 Log In
+        </Link>
+      </div>
+    </main>
   );
 }
+
