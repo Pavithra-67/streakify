@@ -7,7 +7,6 @@ import {
   BookOpen,
   Trophy,
   ShoppingBag,
-  Home,
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -18,14 +17,6 @@ const courses = [
   { id: "js", label: "JavaScript", color: "#FFD93D" },
   { id: "dcn", label: "DCN", color: "#6C63FF" },
 ];
-
-const courseDotColors = {
-  sql: "#FF9A00",
-  nosql: "#2EC4B6",
-  java: "#FF6B6B",
-  javascript: "#FFD93D",
-  dcn: "#6C63FF",
-};
 
 const navItems = [
   { path: "/dashboard", label: "Learn", icon: BookOpen },
@@ -47,17 +38,15 @@ export default function AppSidebar({
     await fetch("/api/auth/logout", {
       method: "POST",
     });
+
     router.replace("/login");
     router.refresh();
   }
 
-  function openLearn() {
-    router.push("/dashboard");
-  }
-
   return (
     <>
-      {/* Desktop Sidebar */}
+      {/* ================= Desktop Sidebar ================= */}
+
       <aside className="sidebar">
         <h1 className="logo">streakify</h1>
         <p className="logo-subtitle">✨ Learn Every Day</p>
@@ -67,17 +56,21 @@ export default function AppSidebar({
 
           {navItems.map((item) => {
             const Icon = item.icon;
+
             return (
               <button
                 key={item.path}
                 className={
-                  pathname === item.path ? "nav-item active" : "nav-item"
+                  pathname === item.path
+                    ? "nav-item active"
+                    : "nav-item"
                 }
                 onClick={() => router.push(item.path)}
               >
                 <span className="nav-icon">
                   <Icon size={18} />
                 </span>
+
                 {item.label}
               </button>
             );
@@ -89,18 +82,21 @@ export default function AppSidebar({
 
               {courses.map((course) => (
                 <button
+                  key={course.id}
                   className={
                     selectedCourse === course.id
                       ? "nav-item selected"
                       : "nav-item"
                   }
-                  key={course.id}
                   onClick={() => setSelectedCourse(course.id)}
                 >
                   <span
                     className="course-dot"
-                    style={{ backgroundColor: course.color }}
+                    style={{
+                      backgroundColor: course.color,
+                    }}
                   />
+
                   {course.label}
                 </button>
               ))}
@@ -115,6 +111,7 @@ export default function AppSidebar({
             <span>
               <Flame size={16} /> {streak ?? 0}
             </span>
+
             <span>
               <Heart size={16} /> {hearts ?? 5}
             </span>
@@ -122,26 +119,85 @@ export default function AppSidebar({
 
           <button className="sign-out" onClick={signOut}>
             <LogOut size={16} />
-            Sign out
+            Sign Out
           </button>
         </div>
       </aside>
 
-      {/* Mobile Bottom Navigation */}
+      {/* ================= Mobile Courses ================= */}
+
+      {pathname === "/dashboard" && setSelectedCourse && (
+        <div className="mobile-courses">
+          <p className="nav-title">COURSES</p>
+
+          <div className="mobile-course-list">
+            {courses.map((course) => (
+              <button
+                key={course.id}
+                className={
+                  selectedCourse === course.id
+                    ? "nav-item selected"
+                    : "nav-item"
+                }
+                onClick={() => setSelectedCourse(course.id)}
+              >
+                <span
+                  className="course-dot"
+                  style={{
+                    backgroundColor: course.color,
+                  }}
+                />
+
+                {course.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ================= Mobile Profile ================= */}
+
+      <div className="mobile-profile">
+        <p className="mobile-user">
+          {userName || "Learner"}
+        </p>
+
+        <div className="stats">
+          <span>
+            <Flame size={16} /> {streak ?? 0}
+          </span>
+
+          <span>
+            <Heart size={16} /> {hearts ?? 5}
+          </span>
+        </div>
+
+        <button className="sign-out" onClick={signOut}>
+          <LogOut size={16} />
+          Sign Out
+        </button>
+      </div>
+
+      {/* ================= Bottom Navigation ================= */}
+
       <nav className="bottom-nav">
         <div className="bottom-nav-inner">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.path;
+
             return (
               <button
                 key={item.path}
                 className={
-                  "bottom-nav-item" + (isActive ? " active" : "")
+                  "bottom-nav-item" +
+                  (pathname === item.path
+                    ? " active"
+                    : "")
                 }
                 onClick={() => router.push(item.path)}
               >
                 <Icon size={22} />
+
                 <span>{item.label}</span>
               </button>
             );
@@ -151,4 +207,3 @@ export default function AppSidebar({
     </>
   );
 }
-

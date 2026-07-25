@@ -14,7 +14,7 @@ export async function POST(request) {
     if (!cleanEmail || !password) {
       return NextResponse.json(
         { message: "Email and password are required." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -28,19 +28,16 @@ export async function POST(request) {
     if (!user) {
       return NextResponse.json(
         { message: "Incorrect email or password." },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
-    const passwordMatches = await bcrypt.compare(
-      password,
-      user.passwordHash
-    );
+    const passwordMatches = await bcrypt.compare(password, user.passwordHash);
 
     if (!passwordMatches) {
       return NextResponse.json(
         { message: "Incorrect email or password." },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -67,10 +64,15 @@ export async function POST(request) {
     });
 
     return response;
-  } catch {
+  } catch (error) {
+    console.error("Login API Error:", error);
+
     return NextResponse.json(
-      { message: "Could not log in." },
-      { status: 500 }
+      {
+        message: "Could not log in.",
+        error: error.message,
+      },
+      { status: 500 },
     );
   }
 }
